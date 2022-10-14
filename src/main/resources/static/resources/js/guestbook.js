@@ -61,3 +61,9 @@ $(document).ready(function() {
 		});
 	});
 });
+
+function edit(long id) {
+	const entry = "entry" + id.toString();
+	var text = document.getElementById(entry);
+	$('.div#'+entry+'.card .div.card-body .blockquote.entrytext').css('display')
+}

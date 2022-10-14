@@ -34,7 +34,9 @@ import org.springframework.util.Assert;
 class GuestbookEntry {
 
 	private @Id @GeneratedValue Long id;
-	private final String name, text;
+	private final String name;
+	private String text;
+	private final String mail;
 	private final LocalDateTime date;
 
 	/**
@@ -50,6 +52,26 @@ class GuestbookEntry {
 
 		this.name = name;
 		this.text = text;
+		this.mail = "";
+		this.date = LocalDateTime.now();
+	}
+
+	/**
+	 * Creates a new {@link GuestbookEntry} for the given name, mail and text.
+	 *
+	 * @param name must not be {@literal null} or empty
+	 * @param text must not be {@literal null} or empty
+	 * @param mail must not be {@literal null} or empty
+	 */
+	public GuestbookEntry(String name, String text, String mail) {
+
+		Assert.hasText(name, "Name must not be null or empty!");
+		Assert.hasText(text, "Text must not be null or empty!");
+		Assert.hasText(text, "Mail must not be null or empty!");
+
+		this.name = name;
+		this.text = text;
+		this.mail = mail;
 		this.date = LocalDateTime.now();
 	}
 
@@ -57,6 +79,7 @@ class GuestbookEntry {
 	private GuestbookEntry() {
 		this.name = null;
 		this.text = null;
+		this.mail = null;
 		this.date = null;
 	}
 
@@ -74,5 +97,12 @@ class GuestbookEntry {
 
 	public String getText() {
 		return text;
+	}
+
+	public String getMail() { return mail; }
+
+	public void editText(String newText) {
+		Assert.hasText(newText, "new text must not be null or empty!");
+		this.text = newText + " (edited by admin)";
 	}
 }

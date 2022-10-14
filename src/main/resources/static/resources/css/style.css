@@ -22,3 +22,11 @@ blockquote {
 form#form {
 	padding: 0 1.25em;
 }
+
+a {
+	color: #5a0070;
+}
+
+#hiddentext {
+	display: none;
+}
